@@ -112,7 +112,10 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # alias ls="colorls"
-alias ls="eza --icons"
+unset LS_COLORS
+unset EZA_COLORS
+export EZA_CONFIG_DIR="$HOME/.config/eza"
+alias ls='eza --icons --color=always'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -136,3 +139,6 @@ ASYNCAPI_AC_ZSH_SETUP_PATH=/home/nguyen-duc-kien/.cache/@asyncapi/cli/autocomple
 
 export WEZTERM_ENABLE_WAYLAND=0
 
+
+# opencode
+export PATH=/home/nguyen-duc-kien/.opencode/bin:$PATH
