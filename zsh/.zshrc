@@ -8,7 +8,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="bira"
 ZSH_THEME=random
 
 # Set list of themes to pick from when loading at random
@@ -75,6 +74,11 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+# Load all configs from ~/.config/zsh/
+for conf in "$HOME/.config/zsh/"*.zsh; do
+    [ -f "$conf" ] && source "$conf"
+done
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -104,41 +108,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# bun completions
-[ -s "/home/nguyen-duc-kien/.bun/_bun" ] && source "/home/nguyen-duc-kien/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# alias ls="colorls"
-unset LS_COLORS
-unset EZA_COLORS
-export EZA_CONFIG_DIR="$HOME/.config/eza"
-alias ls='eza --icons --color=always'
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
+# Load environment variables from tools like uv, rustup, mise
 . "$HOME/.local/bin/env"
 
-# pnpm
-export PNPM_HOME="/home/nguyen-duc-kien/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-alias tm="tmux"
-
-# AsyncAPI CLI Autocomplete
-
-ASYNCAPI_AC_ZSH_SETUP_PATH=/home/nguyen-duc-kien/.cache/@asyncapi/cli/autocomplete/zsh_setup && test -f $ASYNCAPI_AC_ZSH_SETUP_PATH && source $ASYNCAPI_AC_ZSH_SETUP_PATH; # asyncapi autocomplete setup
-
+# Disable Wayland for Wezterm, force X11/XWayland to avoid rendering issues
 export WEZTERM_ENABLE_WAYLAND=0
-
-
-# opencode
-export PATH=/home/nguyen-duc-kien/.opencode/bin:$PATH
