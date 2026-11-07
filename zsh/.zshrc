@@ -109,7 +109,7 @@ done
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Load environment variables from tools like uv, rustup, mise
-. "$HOME/.local/bin/env"
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
 # Disable Wayland for Wezterm, force X11/XWayland to avoid rendering issues
 export WEZTERM_ENABLE_WAYLAND=0
